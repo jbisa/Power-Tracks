@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -20,14 +21,15 @@ class ViewController: UIViewController {
     var counterShot = 1
     
     @IBOutlet var albumArt: UIImageView!
-    @IBOutlet var ShotLabel: UILabel!
-    @IBOutlet var TimeLabel: UILabel!
-    @IBOutlet var SongTitle: UILabel!
-    @IBOutlet var Artist: UILabel!
+    @IBOutlet var shotLabel: UILabel!
+    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var songTitle: UILabel!
+    @IBOutlet var artist: UILabel!
+    @IBOutlet var album: UILabel!
     
     @IBAction func PlayPause(sender: AnyObject) {
         if(beginHour == true) {
-            ShotLabel.text = String(counterShot++)
+            shotLabel.text = String(counterShot++)
             //timeTimer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
             shotTimer = NSTimer.scheduledTimerWithTimeInterval(10, target:self, selector: Selector("nextSong"), userInfo: nil, repeats: true)
             beginHour = !beginHour;
@@ -39,15 +41,12 @@ class ViewController: UIViewController {
             player.pause()
         }
         
-        
-        
         isPlaying = !isPlaying
     }
     
     
     @IBAction func Next(sender: AnyObject) {
         player.skipToNextItem()
-        //timeTimer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
     }
     
     
@@ -57,11 +56,11 @@ class ViewController: UIViewController {
     
     func nextSong() {
         player.skipToNextItem()
-        ShotLabel.text = String(counterShot++)
+        shotLabel.text = String(counterShot++)
     }
     
     func updateTimer() {
-        TimeLabel.text = String(counterTime++)
+        timeLabel.text = String(counterTime++)
     }
     
     override func viewDidLoad() {
@@ -72,6 +71,20 @@ class ViewController: UIViewController {
         let mediaCollection = MPMediaItemCollection(items: mediaItems)
         
         player.setQueueWithItemCollection(mediaCollection)
+        //player.indexOfNowPlayingItem
+        
+        var repItem = mediaCollection.representativeItem
+        //var repItem = mediaItems[player.indexOfNowPlayingItem].representativeItem
+        var title = repItem.title
+        var artistName = repItem.artist
+        var albumName = repItem.albumTitle
+        var art = repItem.artwork
+        
+        songTitle.text = title
+        artist.text = artistName
+        album.text = albumName
+        
+        //albumArt.image = art
     }
 
     override func didReceiveMemoryWarning() {

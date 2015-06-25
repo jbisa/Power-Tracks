@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A602E435-F2CA-4B84-B82D-161EAEAB0AD2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Power Tracks</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6AE47E1C2161E3FD4E3494DFC350A70D0EA69E67</key>
+		<string>https://github.com/jbisa/Power-Tracks.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Power Tracks.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6AE47E1C2161E3FD4E3494DFC350A70D0EA69E67</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jbisa/Power-Tracks.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6AE47E1C2161E3FD4E3494DFC350A70D0EA69E67</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6AE47E1C2161E3FD4E3494DFC350A70D0EA69E67</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Power%20Tracks</string>
+		</dict>
+	</array>
+</dict>
+</plist>
