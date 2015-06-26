@@ -13,19 +13,22 @@ import AVFoundation
 class ViewController: UIViewController {
     
     let player = MPMusicPlayerController.systemMusicPlayer()
+
     var isPlaying: Bool! = false
     var beginHour: Bool! = true
     var timeTimer = NSTimer()
     var shotTimer = NSTimer()
     var counterTime = 0
     var counterShot = 1
+    var albumArtwork: UIImage!
     
     @IBOutlet var albumArt: UIImageView!
+    
     @IBOutlet var shotLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
-    @IBOutlet var songTitle: UILabel!
-    @IBOutlet var artist: UILabel!
-    @IBOutlet var album: UILabel!
+    @IBOutlet var songLabel: UILabel!
+    @IBOutlet var artistLabel: UILabel!
+    @IBOutlet var albumLabel: UILabel!
     
     @IBAction func PlayPause(sender: AnyObject) {
         if(beginHour == true) {
@@ -37,6 +40,12 @@ class ViewController: UIViewController {
         
         if (!isPlaying) {
             player.play()
+            songLabel.text = player.nowPlayingItem.title
+            artistLabel.text = player.nowPlayingItem.artist
+            albumLabel.text = player.nowPlayingItem.albumTitle
+            if (player.nowPlayingItem.artwork != nil) {
+                albumArt.image = player.nowPlayingItem.artwork.imageWithSize(CGSize(width: 320, height: 294))
+            }
         } else {
             player.pause()
         }
@@ -47,16 +56,35 @@ class ViewController: UIViewController {
     
     @IBAction func Next(sender: AnyObject) {
         player.skipToNextItem()
+        player.play()
+        songLabel.text = player.nowPlayingItem.title
+        artistLabel.text = player.nowPlayingItem.artist
+        albumLabel.text = player.nowPlayingItem.albumTitle
+        if (player.nowPlayingItem.artwork != nil) {
+            albumArt.image = player.nowPlayingItem.artwork.imageWithSize(CGSize(width: 320, height: 294))
+        }
     }
     
     
-    @IBAction func Restart(sender: AnyObject) {
-        
-    }
+    @IBAction func Restart(sender: AnyObject) {}
     
     func nextSong() {
+        if (counterShot == 61) {
+            // Hour has been completed
+            shotLabel.text = "Power Hour Completed!"
+            player.stop()
+            return;
+        }
+        
         player.skipToNextItem()
+        player.play()
         shotLabel.text = String(counterShot++)
+        songLabel.text = player.nowPlayingItem.title
+        artistLabel.text = player.nowPlayingItem.artist
+        albumLabel.text = player.nowPlayingItem.albumTitle
+        if (player.nowPlayingItem.artwork != nil) {
+            albumArt.image = player.nowPlayingItem.artwork.imageWithSize(CGSize(width: 320, height: 294))
+        }
     }
     
     func updateTimer() {
@@ -71,20 +99,10 @@ class ViewController: UIViewController {
         let mediaCollection = MPMediaItemCollection(items: mediaItems)
         
         player.setQueueWithItemCollection(mediaCollection)
-        //player.indexOfNowPlayingItem
         
-        var repItem = mediaCollection.representativeItem
-        //var repItem = mediaItems[player.indexOfNowPlayingItem].representativeItem
-        var title = repItem.title
-        var artistName = repItem.artist
-        var albumName = repItem.albumTitle
-        var art = repItem.artwork
-        
-        songTitle.text = title
-        artist.text = artistName
-        album.text = albumName
-        
-        //albumArt.image = art
+        // Set the player to shuffle and repeat all songs
+        player.shuffleMode = MPMusicShuffleMode.Songs
+        player.repeatMode = MPMusicRepeatMode.All
     }
 
     override func didReceiveMemoryWarning() {

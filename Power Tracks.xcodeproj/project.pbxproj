@@ -413,6 +413,7 @@
 				4D29FD2F1B38C59B00047537 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4D29FD301B38C59B00047537 /* Build configuration list for PBXNativeTarget "Power TracksTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +422,7 @@
 				4D29FD321B38C59B00047537 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
