@@ -30,6 +30,10 @@ class ViewController: UIViewController {
     @IBOutlet var artistLabel: UILabel!
     @IBOutlet var albumLabel: UILabel!
     
+    @IBOutlet var playButton: UIButton!
+    @IBOutlet var nextButton: UIButton!
+    @IBOutlet var restartButton: UIButton!
+    
     @IBAction func PlayPause(sender: AnyObject) {
         if(beginHour == true) {
             shotLabel.text = String(counterShot++)
@@ -93,6 +97,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        playButton.layer.cornerRadius = 10.0
+        nextButton.layer.cornerRadius = 10.0
+        restartButton.layer.cornerRadius = 10.0
         
         // Do any additional setup after loading the view, typically from a nib.
         let mediaItems = MPMediaQuery.songsQuery().items
