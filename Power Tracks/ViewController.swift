@@ -19,13 +19,15 @@ class ViewController: UIViewController {
         static let END_HOUR = 61
         static let NEXT_SONG_INTERVAL = NSTimeInterval(60)
         static let UPDATE_TIME_INTERVAL = NSTimeInterval(0.01)
-        static let HOUR_COMPLETED_MSG = "Power Hour Completed!"
+        static let HOUR_COMPLETED_MSG = "Done!"
+        static let PRESS_PLAY_MSG = "PRESS PLAY LET'S GO!!"
+        static let ALERT_SOUND = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("airhorn", ofType: "mp3")!)
     }
     
     let player = MPMusicPlayerController.systemMusicPlayer()
-
+    
     var isPlaying: Bool! = false
-    var beginHour: Bool! = true
+    var notStarted: Bool! = true
     var timeTimer = NSTimer()
     var shotTimer = NSTimer()
     var counterTime = 0
@@ -47,23 +49,25 @@ class ViewController: UIViewController {
     @IBOutlet var restartButton: UIButton!
     
     @IBAction func PlayPause(sender: AnyObject) {
-        if(beginHour == true) {
+        if(notStarted == true) {
             shotLabel.text = String(counterShot++)
             timeTimer = NSTimer.scheduledTimerWithTimeInterval(PowerTracksConstants.UPDATE_TIME_INTERVAL, target:self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
             shotTimer = NSTimer.scheduledTimerWithTimeInterval(PowerTracksConstants.NEXT_SONG_INTERVAL, target:self,
                 selector: Selector("nextSong"), userInfo: nil, repeats: true)
-            beginHour = !beginHour;
+            notStarted = !notStarted;
+            startTime = NSDate.timeIntervalSinceReferenceDate()
         }
         
         if (!isPlaying) {
             player.play()
-            startTime = NSDate.timeIntervalSinceReferenceDate()
             songLabel.text = player.nowPlayingItem.title
             artistLabel.text = player.nowPlayingItem.artist
             albumLabel.text = player.nowPlayingItem.albumTitle
             if (player.nowPlayingItem.artwork != nil) {
                 albumArt.image = player.nowPlayingItem.artwork.imageWithSize(CGSize(width: PowerTracksConstants.WIDTH,
                     height: PowerTracksConstants.HEIGHT))
+            } else {
+                albumArt.image = UIImage(contentsOfFile: "notAvailable")
             }
         } else {
             player.pause()
@@ -71,7 +75,6 @@ class ViewController: UIViewController {
         
         isPlaying = !isPlaying
     }
-    
     
     @IBAction func Next(sender: AnyObject) {
         player.skipToNextItem()
@@ -82,24 +85,49 @@ class ViewController: UIViewController {
         if (player.nowPlayingItem.artwork != nil) {
             albumArt.image = player.nowPlayingItem.artwork.imageWithSize(CGSize(width: PowerTracksConstants.WIDTH,
                 height: PowerTracksConstants.HEIGHT))
+        } else {
+            albumArt.image = UIImage(contentsOfFile: "notAvailable")
         }
     }
     
-    
     @IBAction func Restart(sender: AnyObject) {
         // Restart hour logic here
+        counterTime = 0
+        counterShot = 1
+        notStarted = true
+        isPlaying = false
+        
+        songLabel.text = PowerTracksConstants.PRESS_PLAY_MSG
+        artistLabel.text = ""
+        albumLabel.text = ""
+        
+        player.stop()
+        timeTimer.invalidate()
+        timeLabel.text = "-"
+        shotLabel.text = "0"
     }
     
     func nextSong() {
+        // Check if hour is complete
         if (counterShot == PowerTracksConstants.END_HOUR) {
             // Hour has been completed
             //messageLabel.text = PowerTracksConstants.HOUR_COMPLETED_MSG
             player.stop()
             timeTimer.invalidate()
-            timeLabel.text = "Done!"
+            timeLabel.text = PowerTracksConstants.HOUR_COMPLETED_MSG
             return;
         }
         
+        // Play alert sound
+        /*AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
+        AVAudioSession.sharedInstance().setActive(true, error: nil)
+        var error: NSError?
+        var audioPlayer = AVAudioPlayer()
+        audioPlayer = AVAudioPlayer(contentsOfURL: alertSound, error: nil)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()*/
+        
+        // Skip to next song
         player.skipToNextItem()
         player.play()
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -110,6 +138,8 @@ class ViewController: UIViewController {
         if (player.nowPlayingItem.artwork != nil) {
             albumArt.image = player.nowPlayingItem.artwork.imageWithSize(CGSize(width: PowerTracksConstants.WIDTH,
                 height: PowerTracksConstants.HEIGHT))
+        } else {
+            albumArt.image = UIImage(contentsOfFile: "notAvailable")
         }
     }
     
@@ -129,7 +159,6 @@ class ViewController: UIViewController {
         let strSeconds = String(format: "%02d", seconds)
         let strMilliseconds = String(format: "%02d", milliseconds)
         
-        //concatenate minuets, seconds and milliseconds as assign it to the UILabel
         timeLabel.text = "\(strSeconds):\(strMilliseconds)"
     }
     
@@ -155,7 +184,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 

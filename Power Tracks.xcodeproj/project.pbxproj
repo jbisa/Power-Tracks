@@ -14,6 +14,8 @@
 		4D29FD1E1B38C59B00047537 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D29FD1C1B38C59B00047537 /* LaunchScreen.xib */; };
 		4D29FD2A1B38C59B00047537 /* Power_TracksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D29FD291B38C59B00047537 /* Power_TracksTests.swift */; };
 		4D29FD341B38C64400047537 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D29FD331B38C64400047537 /* MediaPlayer.framework */; };
+		4D66D4E41B3F171E00790119 /* airhorn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4D66D4E31B3F171E00790119 /* airhorn.mp3 */; };
+		4D66D4E61B3F205100790119 /* notAvailable.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 4D66D4E51B3F205100790119 /* notAvailable.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		4D29FD281B38C59B00047537 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D29FD291B38C59B00047537 /* Power_TracksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Power_TracksTests.swift; sourceTree = "<group>"; };
 		4D29FD331B38C64400047537 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		4D66D4E31B3F171E00790119 /* airhorn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = airhorn.mp3; path = ../../../Downloads/airhorn.mp3; sourceTree = "<group>"; };
+		4D66D4E51B3F205100790119 /* notAvailable.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = notAvailable.JPG; path = ../../../Downloads/notAvailable.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 		4D29FD101B38C59B00047537 /* Power Tracks */ = {
 			isa = PBXGroup;
 			children = (
+				4D66D4E51B3F205100790119 /* notAvailable.JPG */,
+				4D66D4E31B3F171E00790119 /* airhorn.mp3 */,
 				4D29FD131B38C59B00047537 /* AppDelegate.swift */,
 				4D29FD151B38C59B00047537 /* ViewController.swift */,
 				4D29FD171B38C59B00047537 /* Main.storyboard */,
@@ -196,6 +202,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D66D4E61B3F205100790119 /* notAvailable.JPG in Resources */,
+				4D66D4E41B3F171E00790119 /* airhorn.mp3 in Resources */,
 				4D29FD191B38C59B00047537 /* Main.storyboard in Resources */,
 				4D29FD1E1B38C59B00047537 /* LaunchScreen.xib in Resources */,
 				4D29FD1B1B38C59B00047537 /* Images.xcassets in Resources */,
