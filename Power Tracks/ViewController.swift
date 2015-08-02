@@ -103,6 +103,7 @@ class ViewController: UIViewController {
         
         player.stop()
         timeTimer.invalidate()
+        shotTimer.invalidate()
         timeLabel.text = "-"
         shotLabel.text = "0"
     }
@@ -147,7 +148,7 @@ class ViewController: UIViewController {
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
         
         //Find the difference between current time and start time.
-        var elapsedTime: NSTimeInterval = (currentTime - startTime)+1
+        var elapsedTime: NSTimeInterval = currentTime - startTime
         
         //calculate the seconds in elapsed time.
         let seconds = UInt8(elapsedTime)
