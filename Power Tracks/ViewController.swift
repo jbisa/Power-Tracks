@@ -56,6 +56,8 @@ class ViewController: UIViewController {
                 selector: Selector("nextSong"), userInfo: nil, repeats: true)
             notStarted = !notStarted;
             startTime = NSDate.timeIntervalSinceReferenceDate()
+            nextButton.enabled = true
+            nextButton.alpha = 1.0
         }
         
         if (!isPlaying) {
@@ -63,17 +65,23 @@ class ViewController: UIViewController {
             songLabel.text = player.nowPlayingItem.title
             artistLabel.text = player.nowPlayingItem.artist
             albumLabel.text = player.nowPlayingItem.albumTitle
+            
             if (player.nowPlayingItem.artwork != nil) {
                 albumArt.image = player.nowPlayingItem.artwork.imageWithSize(CGSize(width: PowerTracksConstants.WIDTH,
                     height: PowerTracksConstants.HEIGHT))
             } else {
                 albumArt.image = UIImage(contentsOfFile: "notAvailable")
             }
+            
+            isPlaying = true
+            playButton.setTitle("Pause", forState: .Normal)
         } else {
             player.pause()
+            isPlaying = false
+            playButton.setTitle("Play", forState: .Normal)
         }
         
-        isPlaying = !isPlaying
+        //isPlaying = !isPlaying
     }
     
     @IBAction func Next(sender: AnyObject) {
@@ -88,6 +96,9 @@ class ViewController: UIViewController {
         } else {
             albumArt.image = UIImage(contentsOfFile: "notAvailable")
         }
+        
+        isPlaying = true
+        playButton.setTitle("Pause", forState: .Normal)
     }
     
     @IBAction func Restart(sender: AnyObject) {
@@ -96,8 +107,11 @@ class ViewController: UIViewController {
         counterShot = 1
         notStarted = true
         isPlaying = false
+        playButton.setTitle("Play", forState: .Normal)
         
         songLabel.text = PowerTracksConstants.PRESS_PLAY_MSG
+        nextButton.enabled = false
+        nextButton.alpha = 0.5
         artistLabel.text = ""
         albumLabel.text = ""
         
@@ -142,6 +156,9 @@ class ViewController: UIViewController {
         } else {
             albumArt.image = UIImage(contentsOfFile: "notAvailable")
         }
+        
+        isPlaying = true
+        playButton.setTitle("Pause", forState: .Normal)
     }
     
     func updateTimer() {
@@ -167,6 +184,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         playButton.layer.cornerRadius = PowerTracksConstants.BUTTON_CORNER
+        playButton.setTitle("Play", forState: .Normal)
+        nextButton.enabled = false
+        nextButton.alpha = 0.5
         nextButton.layer.cornerRadius = PowerTracksConstants.BUTTON_CORNER
         restartButton.layer.cornerRadius = PowerTracksConstants.BUTTON_CORNER
         
